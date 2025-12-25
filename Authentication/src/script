@@ -1,0 +1,42 @@
+-- With admin user
+create user reserve_user with password 'Qmars@0109';
+CREATE DATABASE reservation_db;
+GRANT ALL PRIVILEGES ON DATABASE reservation_db TO reserve_user;
+
+--- With reserve_user User
+create schema user_mng;
+create schema reserve_mng;
+
+create table user_mng.users
+(
+    id        bigint       not null
+        constraint pk_user
+            primary key,
+    username  varchar(255) not null,
+    email     varchar(255) not null,
+    password  varchar(255) not null,
+    create_at timestamp    not null
+);
+
+alter table user_mng.users
+    owner to reserve_user;
+
+create unique index unique_email_idx
+    on user_mng.users (email);
+
+create unique index unique_username_idx
+    on user_mng.users (username);
+
+create table reserve_mng.available_slots
+(
+    id          bigint                not null
+        constraint pk_available_slots
+            primary key,
+    start_time  timestamp             not null,
+    end_time    timestamp             not null,
+    is_reserved boolean default false not null
+);
+
+alter table reserve_mng.available_slots
+    owner to reserve_user;
+

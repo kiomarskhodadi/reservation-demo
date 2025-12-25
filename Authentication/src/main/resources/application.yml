@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: operation
+  application:
+    name: Authentication
+
+application:
+  jwt:
+    expire-time: 108000000
+    expire-refresh-token: 21600000
+    secret-key: The application will unveil as soon as possible

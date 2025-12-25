@@ -1,0 +1,36 @@
+server:
+  port: 8020
+spring:
+  application:
+    name: Gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: authentication
+          uri: lb://authentication
+          predicates:
+            - Path=/authentication/**
+        - id: reserve
+          uri: lb://reserve
+          predicates:
+            - Path=/reserve/**
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+#------- general eureka
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8010/eureka

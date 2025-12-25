@@ -1,0 +1,13 @@
+spring:
+  servlet:
+    context-path: /reserve
+  profiles:
+    active: operation
+  application:
+    name: reserve
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+application:
+  jwt:
+    secret-key: The application will unveil as soon as possible

@@ -1,0 +1,9 @@
+spring:
+  data:
+    redis:
+      port: 6379
+      host: 185.8.173.130
+      jedis:
+        pool:
+          enabled: true
+          min-idle: 10

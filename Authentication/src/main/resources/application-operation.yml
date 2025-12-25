@@ -1,0 +1,49 @@
+server:
+  port: 8030
+spring:
+  datasource:
+    url: jdbc:postgresql://185.8.173.130:5432/reservation_db
+    driver-class-name: org.postgresql.Driver
+    username: reserve_user
+    password: Qmars@0109
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  freemarker:
+    allow-session-override:
+  jwt:
+    length_expire: 6000000
+    length_expire_refresh: 30L*60*10000
+  #----------- config file
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  data:
+    redis:
+      port: 6379
+      host: 185.8.173.130
+      jedis:
+        pool:
+          enabled: true
+          min-idle: 10
+  #  config:
+  #    import: file:/root/PublicFiles/InfraConfigs/application-infra.yml
+#  config:
+#    import: file:./PublicFiles/InfraConfigs/application-infra.yml
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 20 # Notifying Eureka that the client is up or down or killed (second)
+    leaseExpirationDurationInSeconds: 20 # Notifying Eureka that the client is up or down or killed (second)
+    prefer-ip-address: true # registers the service ip rather than the server name
+    hostname: localhost
+  client:
+    register-with-eureka: true # register him self at eureka
+    fetch-registry: true # pull down a local copy of the registries
+    service-url:
+      defaultZone: http://localhost:8010/eureka # discovery service location
