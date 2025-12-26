@@ -19,6 +19,9 @@
     <modules>
         <module>Authentication</module>
         <module>Reserve</module>
+        <module>InfraStructure</module>
+        <module>Gateway</module>
+        <module>ServiceDetector</module>
     </modules>
 
     <properties>
